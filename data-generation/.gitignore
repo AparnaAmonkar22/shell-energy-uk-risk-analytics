@@ -1,0 +1,29 @@
+# Full historical dataset - too large for git, lives in ADLS / local only
+dataset_gen/historical_meter_readings/
+dataset_gen/customers.csv
+dataset_gen/sites.csv
+dataset_gen/contracts.csv
+dataset_gen/billing_invoices.csv
+dataset_gen/wholesale_prices_historical.csv
+
+# Keep the dev subset (small, ~15MB) - explicitly un-ignore it
+!dataset_gen/dev_subset/
+!dataset_gen/dev_subset/**
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Azure / secrets - never commit connection strings or keys
+*.env
+.env
+local.settings.json
+*connection-string*
+
+# Databricks
+.databricks/
+
+# OS
+.DS_Store

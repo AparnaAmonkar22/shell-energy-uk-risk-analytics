@@ -1,0 +1,31 @@
+site_id,customer_id,site_name,mpan,postcode,region,meter_type,annual_baseline_kwh
+SITE00020,CUST00014,"Matthews, Lloyd and Turner - Vanessaville site",308271705170,HU60 9NQ,South East,HH Smart Meter,2988364
+SITE00025,CUST00019,"Ryan, Patel and Wade - Lake Melanieborough site",204099115205,KT75 5NP,South East,HH Smart Meter,780358
+SITE00026,CUST00020,Shaw-Holden - North Deanburgh site,309070900658,B1E 6UZ,North West,HH Smart Meter,1306067
+SITE00038,CUST00026,Stevens-Daniels - East Teresafort site,807612784407,SY99 9ZP,South West,AMR (Automated Meter Reading),242185
+SITE00039,CUST00027,Bates-Glover - Derekmouth site,302488561612,W7 4YB,South East,HH Smart Meter,295674
+SITE00052,CUST00036,Rees Inc - Lake Tomberg site,109895060193,S2C 9GT,South East,HH Smart Meter,1497784
+SITE00085,CUST00053,White-Rees - Sallyburgh site,206584990607,N1 6DR,London,AMR (Automated Meter Reading),657409
+SITE00107,CUST00066,"Weston, Parker and Smith - South Aaronview site",303161830338,EC2 6JA,London,HH Smart Meter,75974
+SITE00114,CUST00070,Dixon LLC - Benfurt site,208872360629,M9F 9NU,South East,AMR (Automated Meter Reading),175444
+SITE00116,CUST00071,"Gould, Stevens and Allan - Lake Lee site",806143999198,W2J 2JB,North East,HH Smart Meter,100096
+SITE00117,CUST00072,Franklin-Jackson - East Jackmouth site,104868646621,SE1 8RP,London,AMR (Automated Meter Reading),2340764
+SITE00124,CUST00077,Kelly-Mills - Wheelerfurt site,303469897763,TD2 0ND,North West,HH Smart Meter,124862
+SITE00131,CUST00081,Hall LLC - New Ian site,302695235919,S20 7GN,East of England,AMR (Automated Meter Reading),2070138
+SITE00135,CUST00083,"Walker, Patel and Howarth - Nicholasfurt site",102169002851,CB2E 5JA,South East,HH Smart Meter,2226871
+SITE00138,CUST00086,Webb-Hunt - North Dorothy site,302531386576,W4 6WN,South West,HH Smart Meter,689491
+SITE00142,CUST00088,"Phillips, Barton and Holden - West Maria site",406570445541,E1 5ZZ,London,HH Smart Meter,613037
+SITE00144,CUST00090,Evans LLC - Greenhaven site,801854018830,TS07 8ST,North West,AMR (Automated Meter Reading),2448170
+SITE00145,CUST00091,Lewis and Sons - New Bethanyport site,306578412668,E1 8YN,London,HH Smart Meter,2189319
+SITE00150,CUST00095,"Lucas, Baldwin and Wilkinson - Lake Ireneside site",309948789478,W1 4UP,London,HH Smart Meter,196928
+SITE00156,CUST00100,"Johnson, Collier and Burrows - Port Beverley site",406435006323,W1 5BA,London,HH Smart Meter,551317
+SITE00163,CUST00104,Pope Group - East Kateside site,409691300905,W35 0HH,South East,HH Smart Meter,193978
+SITE00164,CUST00104,Pope Group - Lake Catherinebury site,801180532309,PL3P 8PN,West Midlands,HH Smart Meter,144839
+SITE00167,CUST00105,Barber LLC - Amyton site,408751361818,W1 1RL,London,AMR (Automated Meter Reading),276577
+SITE00169,CUST00107,Mason-Hammond - West Andreashire site,401198824290,S4C 5JR,Scotland,AMR (Automated Meter Reading),84862
+SITE00175,CUST00110,"Lee, Allen and Watson - Brownside site",809533505978,S0A 8NA,North West,HH Smart Meter,161988
+SITE00187,CUST00116,Phillips and Sons - Robertview site,106846875077,LU35 6GY,South East,HH Smart Meter,2906446
+SITE00188,CUST00117,"Jenkins, Smith and Steele - Cunninghamport site",201422927031,E14 6FR,East of England,HH Smart Meter,401255
+SITE00189,CUST00117,"Jenkins, Smith and Steele - Rebeccaville site",401160070135,SE1 8YJ,London,AMR (Automated Meter Reading),1138131
+SITE00192,CUST00118,Hall Inc - Webbland site,403516249441,NR1 6AN,Scotland,AMR (Automated Meter Reading),123498
+SITE00198,CUST00120,Woodward PLC - Mandyborough site,104069691437,WC2 5EF,London,HH Smart Meter,670646
