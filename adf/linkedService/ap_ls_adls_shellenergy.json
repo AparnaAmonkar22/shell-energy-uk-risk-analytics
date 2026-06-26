@@ -1,0 +1,20 @@
+{
+	"name": "ap_ls_adls_shellenergy",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://aparnastshellenergyuks.dfs.core.windows.net",
+			"accountKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ap_AKV_shellenergyuks",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "aparna-adls-storage-account-key",
+				"secretVersion": "0c8407750cb14c2b8dc277f7c19e0ecb"
+			}
+		}
+	}
+}

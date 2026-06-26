@@ -1,0 +1,31 @@
+{
+	"name": "ap_ds_http_csv_source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ap_ls_http_github_raw",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"relativeFileURL": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "@dataset().relativeFileURL",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
