@@ -123,6 +123,42 @@ def seasonal_demand_factor(dt, sector):
     return 1.0 + 0.18 * winter_peak
 
 
+def compute_sector_normalization_factors():
+    """
+    Numerically computes each sector's TRUE average load factor across a
+    representative week (5 weekdays + 2 weekend days, all 48 half-hourly
+    intervals per day), then derives a per-sector multiplier so that
+    avg_interval_kwh * shape * multiplier averages out to avg_interval_kwh
+    (i.e. annual simulated consumption actually matches each site's
+    annual_baseline_kwh / contracted volume, regardless of sector).
+
+    This replaces a single flat multiplier that was only correct for
+    sectors whose shape function happens to average ~0.5 - it was silently
+    wrong for Data Centre (avg shape ~0.92, would run ~2x over baseline)
+    and Office (avg shape ~0.34, would run ~30% under baseline).
+    """
+    reference_date = datetime(2026, 3, 16)  # arbitrary mid-March Monday, mid-season
+    sectors = [
+        "Office / Commercial Real Estate", "Retail", "Manufacturing", "Data Centre",
+        "Logistics & Warehousing", "Hospitality", "Healthcare", "Education",
+        "Food & Beverage Production",
+    ]
+    factors = {}
+    for sector in sectors:
+        samples = []
+        for day_offset in range(7):  # Mon..Sun
+            day = reference_date + timedelta(days=day_offset)
+            for half_hour in range(48):
+                dt = day + timedelta(minutes=30 * half_hour)
+                samples.append(sector_load_factor(sector, dt))
+        avg_shape = sum(samples) / len(samples)
+        factors[sector] = 1.0 / avg_shape if avg_shape > 0 else 1.0
+    return factors
+
+
+SECTOR_NORMALIZATION_FACTOR = compute_sector_normalization_factors()
+
+
 def load_sites():
     df = pd.read_csv(SITES_CSV)
     return df.to_dict("records")
@@ -157,7 +193,8 @@ def generate_month(sites_with_sector, year, month):
             shape = sector_load_factor(sector, cursor)
             season = seasonal_demand_factor(cursor, sector)
             noise = random.gauss(1.0, 0.06)
-            kwh = max(avg_interval_kwh * shape * season * noise * 2.1, 0)  # *2.1 normalises shape avg ~0.5 back to baseline
+            normalization_factor = SECTOR_NORMALIZATION_FACTOR[sector]
+            kwh = max(avg_interval_kwh * shape * season * noise * normalization_factor, 0)
 
             meter_status = "Normal"
             data_quality_flag = "OK"
