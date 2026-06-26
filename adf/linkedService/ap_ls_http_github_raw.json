@@ -1,0 +1,13 @@
+{
+	"name": "ap_ls_http_github_raw",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://raw.githubusercontent.com/AparnaAmonkar22/shell-energy-uk-risk-analytics/main/",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}

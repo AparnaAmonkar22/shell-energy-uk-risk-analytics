@@ -1,0 +1,160 @@
+{
+	"name": "ap_pl_batch_ingest_dev_subset",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.fileList",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "ap_copy_file_to_bronze",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "HttpReadSettings",
+										"requestMethod": "GET"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "ap_ds_http_csv_source",
+									"type": "DatasetReference",
+									"parameters": {
+										"relativeFileURL": {
+											"value": "@item().relativeFileURL",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ap_ds_adls_bronze_sink",
+									"type": "DatasetReference",
+									"parameters": {
+										"folderName": {
+											"value": "@item().folderName",
+											"type": "Expression"
+										},
+										"fileName": {
+											"value": "@item().fileName",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"fileList": {
+				"type": "array",
+				"defaultValue": [
+					{
+						"relativeFileURL": "data-generation/dev_subset/customers.csv",
+						"folderName": "customers",
+						"fileName": "customers.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/sites.csv",
+						"folderName": "sites",
+						"fileName": "sites.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/contracts.csv",
+						"folderName": "contracts",
+						"fileName": "contracts.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/billing_invoices.csv",
+						"folderName": "billing_invoices",
+						"fileName": "billing_invoices.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/wholesale_prices_historical.csv",
+						"folderName": "wholesale_prices",
+						"fileName": "wholesale_prices_historical.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202601.csv",
+						"folderName": "meter_readings",
+						"fileName": "meter_readings_202601.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202602.csv",
+						"folderName": "meter_readings",
+						"fileName": "meter_readings_202602.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202603.csv",
+						"folderName": "meter_readings",
+						"fileName": "meter_readings_202603.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202604.csv",
+						"folderName": "meter_readings",
+						"fileName": "meter_readings_202604.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202605.csv",
+						"folderName": "meter_readings",
+						"fileName": "meter_readings_202605.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202606.csv",
+						"folderName": "meter_readings",
+						"fileName": "meter_readings_202606.csv"
+					}
+				]
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-06-25T23:51:10Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

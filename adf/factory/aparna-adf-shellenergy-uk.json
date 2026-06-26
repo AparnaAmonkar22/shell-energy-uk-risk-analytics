@@ -1,0 +1,15 @@
+{
+	"name": "aparna-adf-shellenergy-uk",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "uksouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "b7105edb-5296-4846-99dd-143ac9148165",
+		"tenantId": "2b32b1fa-7899-482e-a6de-be99c0ff5516"
+	}
+}
