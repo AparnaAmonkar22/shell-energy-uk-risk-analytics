@@ -97,57 +97,57 @@
 				"defaultValue": [
 					{
 						"relativeFileURL": "data-generation/dev_subset/customers.csv",
-						"folderName": "customers",
+						"folderName": "batch/customers",
 						"fileName": "customers.csv"
 					},
 					{
 						"relativeFileURL": "data-generation/dev_subset/sites.csv",
-						"folderName": "sites",
+						"folderName": "batch/sites",
 						"fileName": "sites.csv"
 					},
 					{
 						"relativeFileURL": "data-generation/dev_subset/contracts.csv",
-						"folderName": "contracts",
+						"folderName": "batch/contracts",
 						"fileName": "contracts.csv"
 					},
 					{
 						"relativeFileURL": "data-generation/dev_subset/billing_invoices.csv",
-						"folderName": "billing_invoices",
+						"folderName": "batch/billing_invoices",
 						"fileName": "billing_invoices.csv"
 					},
 					{
 						"relativeFileURL": "data-generation/dev_subset/wholesale_prices_historical.csv",
-						"folderName": "wholesale_prices",
+						"folderName": "batch/wholesale_prices",
 						"fileName": "wholesale_prices_historical.csv"
 					},
 					{
 						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202601.csv",
-						"folderName": "meter_readings",
+						"folderName": "batch/meter_readings",
 						"fileName": "meter_readings_202601.csv"
 					},
 					{
 						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202602.csv",
-						"folderName": "meter_readings",
+						"folderName": "batch/meter_readings",
 						"fileName": "meter_readings_202602.csv"
 					},
 					{
 						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202603.csv",
-						"folderName": "meter_readings",
+						"folderName": "batch/meter_readings",
 						"fileName": "meter_readings_202603.csv"
 					},
 					{
 						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202604.csv",
-						"folderName": "meter_readings",
+						"folderName": "batch/meter_readings",
 						"fileName": "meter_readings_202604.csv"
 					},
 					{
 						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202605.csv",
-						"folderName": "meter_readings",
+						"folderName": "batch/meter_readings",
 						"fileName": "meter_readings_202605.csv"
 					},
 					{
 						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202606.csv",
-						"folderName": "meter_readings",
+						"folderName": "batch/meter_readings",
 						"fileName": "meter_readings_202606.csv"
 					}
 				]
