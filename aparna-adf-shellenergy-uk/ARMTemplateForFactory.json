@@ -1,0 +1,326 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "aparna-adf-shellenergy-uk"
+		},
+		"ap_AKV_shellenergyuks_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kv-bd-training-uk.vault.azure.net/"
+		},
+		"ap_ls_adls_shellenergy_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://aparnastshellenergyuks.dfs.core.windows.net"
+		},
+		"ap_ls_http_github_raw_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/AparnaAmonkar22/shell-energy-uk-risk-analytics/main/"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/ap_pl_batch_ingest_dev_subset')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ForEach1",
+						"type": "ForEach",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@pipeline().parameters.fileList",
+								"type": "Expression"
+							},
+							"isSequential": true,
+							"activities": [
+								{
+									"name": "ap_copy_file_to_bronze",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "DelimitedTextSource",
+											"storeSettings": {
+												"type": "HttpReadSettings",
+												"requestMethod": "GET"
+											},
+											"formatSettings": {
+												"type": "DelimitedTextReadSettings"
+											}
+										},
+										"sink": {
+											"type": "DelimitedTextSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "DelimitedTextWriteSettings",
+												"quoteAllText": true,
+												"fileExtension": ".txt"
+											}
+										},
+										"enableStaging": false,
+										"translator": {
+											"type": "TabularTranslator",
+											"typeConversion": true,
+											"typeConversionSettings": {
+												"allowDataTruncation": true,
+												"treatBooleanAsNumber": false
+											}
+										}
+									},
+									"inputs": [
+										{
+											"referenceName": "ap_ds_http_csv_source",
+											"type": "DatasetReference",
+											"parameters": {
+												"relativeFileURL": {
+													"value": "@item().relativeFileURL",
+													"type": "Expression"
+												}
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "ap_ds_adls_bronze_sink",
+											"type": "DatasetReference",
+											"parameters": {
+												"folderName": {
+													"value": "@item().folderName",
+													"type": "Expression"
+												},
+												"fileName": {
+													"value": "@item().fileName",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"fileList": {
+						"type": "array",
+						"defaultValue": [
+							{
+								"relativeFileURL": "data-generation/dev_subset/customers.csv",
+								"folderName": "batch/customers",
+								"fileName": "customers.csv"
+							},
+							{
+								"relativeFileURL": "data-generation/dev_subset/sites.csv",
+								"folderName": "batch/sites",
+								"fileName": "sites.csv"
+							},
+							{
+								"relativeFileURL": "data-generation/dev_subset/contracts.csv",
+								"folderName": "batch/contracts",
+								"fileName": "contracts.csv"
+							},
+							{
+								"relativeFileURL": "data-generation/dev_subset/billing_invoices.csv",
+								"folderName": "batch/billing_invoices",
+								"fileName": "billing_invoices.csv"
+							},
+							{
+								"relativeFileURL": "data-generation/dev_subset/wholesale_prices_historical.csv",
+								"folderName": "batch/wholesale_prices",
+								"fileName": "wholesale_prices_historical.csv"
+							},
+							{
+								"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202601.csv",
+								"folderName": "batch/meter_readings",
+								"fileName": "meter_readings_202601.csv"
+							},
+							{
+								"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202602.csv",
+								"folderName": "batch/meter_readings",
+								"fileName": "meter_readings_202602.csv"
+							},
+							{
+								"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202603.csv",
+								"folderName": "batch/meter_readings",
+								"fileName": "meter_readings_202603.csv"
+							},
+							{
+								"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202604.csv",
+								"folderName": "batch/meter_readings",
+								"fileName": "meter_readings_202604.csv"
+							},
+							{
+								"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202605.csv",
+								"folderName": "batch/meter_readings",
+								"fileName": "meter_readings_202605.csv"
+							},
+							{
+								"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202606.csv",
+								"folderName": "batch/meter_readings",
+								"fileName": "meter_readings_202606.csv"
+							}
+						]
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2026-06-25T23:51:10Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ap_ds_http_csv_source')]",
+				"[concat(variables('factoryId'), '/datasets/ap_ds_adls_bronze_sink')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ap_ds_adls_bronze_sink')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ap_ls_adls_shellenergy",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"folderName": {
+						"type": "string"
+					},
+					"fileName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().fileName",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().folderName",
+							"type": "Expression"
+						},
+						"fileSystem": "bronze"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ap_ls_adls_shellenergy')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ap_ds_http_csv_source')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ap_ls_http_github_raw",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"relativeFileURL": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation",
+						"relativeUrl": {
+							"value": "@dataset().relativeFileURL",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ap_ls_http_github_raw')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ap_AKV_shellenergyuks')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('ap_AKV_shellenergyuks_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ap_ls_adls_shellenergy')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('ap_ls_adls_shellenergy_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "ap_AKV_shellenergyuks",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "aparna-adls-storage-account-key",
+						"secretVersion": "0c8407750cb14c2b8dc277f7c19e0ecb"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ap_AKV_shellenergyuks')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ap_ls_http_github_raw')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "HttpServer",
+				"typeProperties": {
+					"url": "[parameters('ap_ls_http_github_raw_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

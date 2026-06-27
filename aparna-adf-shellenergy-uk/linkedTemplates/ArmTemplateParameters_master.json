@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "aparna-adf-shellenergy-uk"
+		},
+		"ap_AKV_shellenergyuks_properties_typeProperties_baseUrl": {
+			"value": "https://kv-bd-training-uk.vault.azure.net/"
+		},
+		"ap_ls_adls_shellenergy_properties_typeProperties_url": {
+			"value": "https://aparnastshellenergyuks.dfs.core.windows.net"
+		},
+		"ap_ls_http_github_raw_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/AparnaAmonkar22/shell-energy-uk-risk-analytics/main/"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
