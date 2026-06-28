@@ -1,0 +1,134 @@
+-- ============================================================
+-- Synapse Serverless SQL setup: ap_shell_energy_gold_db
+-- Creates external tables exposing the Gold Delta layer for
+-- Power BI consumption.
+--
+-- SECURITY NOTE: this script intentionally does NOT contain a real
+-- SAS token or password. Before running, substitute:
+--   1. A strong password of your own choosing for the master key
+--   2. A freshly generated SAS token (Storage Account -> Shared
+--      access signature -> Read + List permissions, Service +
+--      Container + Object resource types -> Generate SAS and
+--      connection string), with the leading '?' character removed
+-- Never commit a real SAS token, key, or password to source control.
+-- ============================================================
+
+CREATE DATABASE ap_shell_energy_gold_db;
+USE ap_shell_energy_gold_db;
+
+CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<SET_YOUR_OWN_STRONG_PASSWORD>';
+
+CREATE DATABASE SCOPED CREDENTIAL ApShellEnergyStorageCredential
+WITH IDENTITY = 'SHARED ACCESS SIGNATURE',
+SECRET = '<PASTE_FRESH_SAS_TOKEN_HERE_NO_LEADING_QUESTION_MARK>';
+
+-- Verify the credential was created
+SELECT * FROM sys.database_credentials;
+
+-- External data source pointing at the Gold container
+CREATE EXTERNAL DATA SOURCE ShellEnergyGoldStorage
+WITH (
+    LOCATION = 'abfss://gold@aparnastshellenergyuks.dfs.core.windows.net',
+    CREDENTIAL = ApShellEnergyStorageCredential
+);
+
+-- Delta file format, reused by every external table below
+CREATE EXTERNAL FILE FORMAT DeltaFormat
+WITH (
+    FORMAT_TYPE = DELTA
+);
+
+-- gold_batch_site_monthly_summary
+CREATE EXTERNAL TABLE gold_batch_site_monthly_summary (
+    billing_month DATETIME2,
+    site_id VARCHAR(20),
+    actual_kwh FLOAT,
+    gap_filled_kwh FLOAT,
+    outage_interval_count BIGINT,
+    contract_id VARCHAR(20),
+    contracted_monthly_kwh FLOAT,
+    rate_gbp_per_kwh FLOAT,
+    standing_charge_gbp_per_day FLOAT,
+    avg_wholesale_price_gbp_per_mwh FLOAT,
+    days_in_month INT,
+    variance_pct FLOAT,
+    true_wholesale_cost_gbp FLOAT,
+    billed_energy_charge_gbp FLOAT,
+    billed_standing_charge_gbp FLOAT,
+    billed_total_gbp FLOAT,
+    gross_margin_over_wholesale_gbp FLOAT,
+    gross_margin_over_wholesale_pct FLOAT,
+    network_charges_gbp FLOAT,
+    policy_costs_gbp FLOAT,
+    operating_costs_gbp FLOAT,
+    net_margin_gbp FLOAT,
+    net_margin_pct FLOAT
+)
+WITH (
+    LOCATION = 'batch/site_monthly_summary/',
+    DATA_SOURCE = ShellEnergyGoldStorage,
+    FILE_FORMAT = DeltaFormat
+);
+
+-- Verify schema and data read correctly
+SELECT TOP 10 * FROM gold_batch_site_monthly_summary ORDER BY billing_month, site_id;
+
+-- gold_batch_exposure_daily
+CREATE EXTERNAL TABLE gold_batch_exposure_daily (
+    site_id VARCHAR(20),
+    reading_date DATE,
+    actual_daily_kwh FLOAT,
+    contract_id VARCHAR(20),
+    contracted_daily_kwh FLOAT,
+    avg_daily_wholesale_price_gbp_per_mwh FLOAT,
+    variance_kwh FLOAT,
+    variance_pct FLOAT,
+    daily_exposure_gbp FLOAT,
+    exposure_direction VARCHAR(20)
+)
+WITH (
+    LOCATION = 'batch/exposure_daily/',
+    DATA_SOURCE = ShellEnergyGoldStorage,
+    FILE_FORMAT = DeltaFormat
+);
+
+-- gold_batch_portfolio_summary
+CREATE EXTERNAL TABLE gold_batch_portfolio_summary (
+    billing_month DATETIME2,
+    active_site_count BIGINT,
+    total_actual_kwh FLOAT,
+    total_contracted_kwh FLOAT,
+    total_billed_gbp FLOAT,
+    total_wholesale_cost_gbp FLOAT,
+    total_net_margin_gbp FLOAT,
+    lossmaking_site_count BIGINT,
+    sites_over_10pct_variance BIGINT,
+    portfolio_variance_pct FLOAT,
+    portfolio_net_margin_pct FLOAT
+)
+WITH (
+    LOCATION = 'batch/portfolio_summary/',
+    DATA_SOURCE = ShellEnergyGoldStorage,
+    FILE_FORMAT = DeltaFormat
+);
+
+-- gold_streaming_live_exposure
+CREATE EXTERNAL TABLE gold_streaming_live_exposure (
+    site_id VARCHAR(20),
+    interval_start DATETIME2,
+    kwh_interval FLOAT,
+    contracted_daily_kwh FLOAT,
+    exposure_kwh FLOAT,
+    price_gbp_per_mwh FLOAT,
+    live_exposure_gbp FLOAT
+)
+WITH (
+    LOCATION = 'streaming/live_exposure/',
+    DATA_SOURCE = ShellEnergyGoldStorage,
+    FILE_FORMAT = DeltaFormat
+);
+
+-- Final verification queries
+SELECT TOP 5 * FROM gold_batch_exposure_daily ORDER BY reading_date DESC;
+SELECT TOP 5 * FROM gold_batch_portfolio_summary ORDER BY billing_month;
+SELECT TOP 5 * FROM gold_streaming_live_exposure ORDER BY interval_start DESC;
