@@ -1,12 +1,20 @@
 """
 Creates a small dev/test subset from the already-generated full dataset:
-  - 30 sites (instead of 246)
-  - 6 months of meter readings (instead of 30) - the most recent 6 full
-    months available, so the dev set still lines up with the tail end of
-    the streaming demo (continuity between batch history and "live" data)
+  - 15 sites (instead of 246) - reduced from an earlier 30-site version
+    specifically to keep volume modest now that the full 2024-2026 date
+    range is included, since site count and date range both multiply
+    total row count
+  - FULL 30-month range (2024-01 through 2026-06) instead of just the most
+    recent 6 months - needed so dashboards can show genuine multi-year
+    trend comparison, not just a single half-year snapshot
   - matching subset of customers, contracts, billing_invoices
-  - wholesale_prices_historical filtered to the same 6-month window
+  - wholesale_prices_historical filtered to the same full date window
     (this one stays site-independent so it's just a date filter)
+
+Sized to land around ~35-40MB total for meter readings, comfortably within
+GitHub's normal file-size comfort zone, so this can still be pushed to the
+repo and pulled by ADF via the existing HTTP connector pattern - no need to
+switch to a direct ADLS upload for this volume.
 
 This does NOT touch the full dataset - it reads from it and writes a
 separate dev_subset/ folder, so you can point ADF/Databricks at whichever
@@ -20,13 +28,19 @@ import pandas as pd
 
 BASE = "/home/claude/dataset_gen"
 DEV_DIR = os.path.join(BASE, "dev_subset")
-NUM_DEV_SITES = 30
-DEV_MONTHS = ["202601", "202602", "202603", "202604", "202605", "202606"]  # most recent 6 full-ish months
+NUM_DEV_SITES = 10
+DEV_MONTHS = [
+    "202401", "202402", "202403", "202404", "202405", "202406",
+    "202407", "202408", "202409", "202410", "202411", "202412",
+    "202501", "202502", "202503", "202504", "202505", "202506",
+    "202507", "202508", "202509", "202510", "202511", "202512",
+    "202601", "202602", "202603", "202604", "202605", "202606",
+]  # full 2024-01 through 2026-06 range, 30 months total
 
 os.makedirs(DEV_DIR, exist_ok=True)
 os.makedirs(os.path.join(DEV_DIR, "historical_meter_readings"), exist_ok=True)
 
-# 1. Pick 30 sites, but bias selection to include a mix of sectors so the
+# 1. Pick 15 sites, but bias selection to include a mix of sectors so the
 #    dev set still demonstrates the different consumption shapes
 sites = pd.read_csv(os.path.join(BASE, "sites.csv"))
 customers = pd.read_csv(os.path.join(BASE, "customers.csv"))

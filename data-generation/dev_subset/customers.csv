@@ -1,29 +1,11 @@
 customer_id,company_name,sector,companies_house_no,account_manager,customer_since,credit_rating
-CUST00014,"Matthews, Lloyd and Turner",Hospitality,5437923,Louis Green,2018-04-14,A
-CUST00019,"Ryan, Patel and Wade",Data Centre,5855124,Mr Clifford Duncan,2018-02-12,A
 CUST00020,Shaw-Holden,Data Centre,2694522,Alice Tomlinson-Shaw,2023-09-06,B
-CUST00026,Stevens-Daniels,Data Centre,3741438,Gerard Jones,2022-09-16,B
-CUST00027,Bates-Glover,Healthcare,5528972,Miss Kirsty Ali,2023-03-08,C
-CUST00036,Rees Inc,Food & Beverage Production,5408072,Terence Ahmed,2023-08-26,C
 CUST00053,White-Rees,Hospitality,9197443,Dr Clive Hart,2020-05-25,A
 CUST00066,"Weston, Parker and Smith",Retail,4860684,Mr Julian Browne,2020-10-15,B
 CUST00070,Dixon LLC,Food & Beverage Production,4993055,Simon Khan,2019-05-22,B
-CUST00071,"Gould, Stevens and Allan",Education,4594297,Dr Lynne Farmer,2022-12-30,B
-CUST00072,Franklin-Jackson,Office / Commercial Real Estate,8930103,Mark Baxter-Miller,2020-04-13,A
-CUST00077,Kelly-Mills,Retail,2651177,Dr Bradley Mitchell,2022-12-28,A
-CUST00081,Hall LLC,Healthcare,4078418,Dr Jake Butler,2023-10-13,B
-CUST00083,"Walker, Patel and Howarth",Education,2642635,Lisa Wright,2022-12-25,A
 CUST00086,Webb-Hunt,Education,9075854,Bernard Goddard,2020-08-12,A
-CUST00088,"Phillips, Barton and Holden",Healthcare,1036161,Olivia Wallace,2019-06-19,B
 CUST00090,Evans LLC,Healthcare,9164991,Miss Hilary Harrison,2019-08-29,A
-CUST00091,Lewis and Sons,Data Centre,5977931,Alice Atkinson,2020-12-06,A
 CUST00095,"Lucas, Baldwin and Wilkinson",Office / Commercial Real Estate,1954280,Mr Lewis Stevens,2020-11-26,B
-CUST00100,"Johnson, Collier and Burrows",Food & Beverage Production,6307805,Derek Cunningham,2019-06-28,B
 CUST00104,Pope Group,Manufacturing,1156287,Leigh Wright,2019-10-01,B
-CUST00105,Barber LLC,Manufacturing,2229110,Julian Hammond-Barnes,2019-08-03,B
-CUST00107,Mason-Hammond,Office / Commercial Real Estate,6855396,Natasha Wright,2022-12-11,A
-CUST00110,"Lee, Allen and Watson",Logistics & Warehousing,9874152,Dr Gerard Thomas,2022-07-15,A
-CUST00116,Phillips and Sons,Hospitality,4415796,Beverley Wallace-Jones,2018-03-05,C
 CUST00117,"Jenkins, Smith and Steele",Logistics & Warehousing,9479356,Thomas Fisher,2018-07-24,B
-CUST00118,Hall Inc,Logistics & Warehousing,1852264,Martin Morley,2022-04-20,A
-CUST00120,Woodward PLC,Retail,6596150,Joseph Taylor-White,2022-09-27,A
+CUST00128,Johnson-Simmons,Data Centre,5186414,Maria Davis,2023-02-26,C
