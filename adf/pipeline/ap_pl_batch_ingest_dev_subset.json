@@ -121,6 +121,126 @@
 						"fileName": "wholesale_prices_historical.csv"
 					},
 					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202401.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202401.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202402.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202402.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202403.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202403.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202404.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202404.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202405.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202405.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202406.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202406.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202407.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202407.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202408.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202408.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202409.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202409.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202410.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202410.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202411.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202411.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202412.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202412.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202501.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202501.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202502.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202502.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202503.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202503.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202504.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202504.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202505.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202505.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202506.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202506.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202507.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202507.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202508.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202508.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202509.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202509.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202510.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202510.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202511.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202511.csv"
+					},
+					{
+						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202512.csv",
+						"folderName": "batch/meter_readings",
+						"fileName": "meter_readings_202512.csv"
+					},
+					{
 						"relativeFileURL": "data-generation/dev_subset/historical_meter_readings/meter_readings_202601.csv",
 						"folderName": "batch/meter_readings",
 						"fileName": "meter_readings_202601.csv"
