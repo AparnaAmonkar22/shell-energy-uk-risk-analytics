@@ -117,6 +117,37 @@
 								}
 							]
 						}
+					},
+					{
+						"name": "notify_failure_email",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "ForEach1",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"method": "POST",
+							"headers": {
+								"Content-Type": "application/json"
+							},
+							"url": "https://prod-00.uksouth.logic.azure.com:443/workflows/0a0008b21cc944c696f62db6db4c393e/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=XHP-7-PGZZDBhqiIszENUPslZNWPa9ASPyimVhhAO7o",
+							"body": {
+								"value": "{\n    \"pipelineName\": \"@{pipeline().Pipeline}\",\n    \"runId\": \"@{pipeline().RunId}\",\n    \"status\": \"FAILED\",\n    \"errorMessage\": \"One or more ForEach iterations failed. Check ADF run details for specific errors. Run ID: @{pipeline().RunId}\",\n    \"startTime\": \"@{pipeline().TriggerTime}\",\n    \"endTime\": \"@{utcNow()}\",\n    \"dataFactory\": \"@{pipeline().DataFactory}\"\n}",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"policy": {
