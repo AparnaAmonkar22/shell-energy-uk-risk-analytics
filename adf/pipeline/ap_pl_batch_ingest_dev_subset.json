@@ -127,7 +127,7 @@
 				"type": "array",
 				"defaultValue": [
 					{
-						"relativeFileURL": "data-generation/dev_subset/ustomers.csv",
+						"relativeFileURL": "data-generation/dev_subset/customers.csv",
 						"folderName": "batch/customers",
 						"fileName": "customers.csv"
 					},
